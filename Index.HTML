@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYZUCH | Universal AI & Productivity Hub</title>
+    <meta name="description" content="Universal AI & Productivity Workstation Hub for students, creators, developers, and businesses.">
+    <meta name="theme-color" content="#121212">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="KYZUCH">
+    <link rel="icon" type="image/jpeg" href="https://cdn.discordapp.com/attachments/1519563887102529632/1542891700802949211/Logo_Kyzuch_2.jpg?ex=6a9432df&is=6a92e15f&hm=ad9e3228f6dceb55e49aeeb1924454f1a9d2ec5fcdbebcc863eaecee4eb2d659">
+    <link rel="apple-touch-icon" href="https://cdn.discordapp.com/attachments/1519563887102529632/1542891700802949211/Logo_Kyzuch_2.jpg?ex=6a9432df&is=6a92e15f&hm=ad9e3228f6dceb55e49aeeb1924454f1a9d2ec5fcdbebcc863eaecee4eb2d659">
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+
+    <!-- Google Fonts: Inter (Global) & Oxanium (Logo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oxanium:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        logo: ['Oxanium', 'sans-serif'],
+                    },
+                    colors: {
+                        'kz-bg': '#121212',
+                        'kz-card': '#1E1E1E',
+                        'kz-card-hover': '#262626',
+                        'kz-text-primary': '#E0E0E0',
+                        'kz-text-secondary': '#8E8E8E',
+                        'kz-accent-calm': '#7393B3',
+                        'kz-accent-light': '#93b4d4',
+                        'kz-border': '#2E2E2E'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2E2E2E; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444444; 
+        }
+
+        .glass-header {
+            background: rgba(18, 18, 18, 0.90);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid #2E2E2E;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.25s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: max-content;
+            background-color: #242424;
+            color: #E0E0E0;
+            text-align: center;
+            border-radius: 6px;
+            padding: 4px 8px;
+            position: absolute;
+            z-index: 50;
+            bottom: 120%; 
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-size: 0.7rem;
+            border: 1px solid #333333;
+            pointer-events: none;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased min-h-screen flex flex-col selection:bg-kz-accent-calm/30 selection:text-white">
+    <div id="app" class="flex-grow flex flex-col">
+        
+        <!-- Header / Navigation -->
+        <header class="glass-header sticky top-0 z-40 px-4 sm:px-6 py-2.5 flex justify-between items-center transition-all duration-300">
+            <div class="flex items-center gap-3">
+                <!-- Custom Logo -->
+                <img 
+                    src="https://cdn.discordapp.com/attachments/1519563887102529632/1542891700802949211/Logo_Kyzuch_2.jpg?ex=6a9432df&is=6a92e15f&hm=ad9e3228f6dceb55e49aeeb1924454f1a9d2ec5fcdbebcc863eaecee4eb2d659" 
+                    alt="Logo KYZUCH" 
+                    class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border border-kz-border hover:border-kz-accent-calm transition-colors shadow-sm"
+                >
+
+                <!-- Oxanium Logo Text -->
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-xl sm:text-2xl font-logo font-bold tracking-wider text-white">KYZUCH</h1>
+                        <span class="hidden sm:inline-block px-1.5 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider bg-kz-accent-calm/20 text-kz-accent-light border border-kz-accent-calm/30">
+                            Hub
+                        </span>
+                    </div>
+                    <span class="text-[10px] text-kz-text-secondary -mt-1 hidden sm:block">Universal AI & Productivity Workstation</span>
+                </div>
+            </div>
+
+            <!-- Header Quick Action Widgets -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                
+                <!-- Live Clock & Dynamic Greeting Pill -->
+                <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-kz-card border border-kz-border text-xs text-kz-text-secondary">
+                    <span id="headerGreetingText" class="text-kz-accent-light font-medium">Hello,</span>
+                    <span class="text-slate-500 font-mono">|</span>
+                    <i class="ph ph-clock text-kz-accent-calm"></i>
+                    <span id="headerClockTime" class="font-mono text-white font-semibold">--:--</span>
+                </div>
+
+                <!-- Pomodoro Timer Toggle Button -->
+                <button 
+                    id="btnTogglePomodoro"
+                    class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-kz-card hover:bg-kz-card-hover border border-kz-border hover:border-kz-accent-calm/50 text-kz-text-primary text-xs font-semibold flex items-center gap-1.5 transition-all"
+                    title="Buka Pomodoro Focus Timer"
+                >
+                    <i class="ph ph-timer text-amber-400 text-sm"></i>
+                    <span id="pomodoroHeaderLabel" class="hidden sm:inline">Focus Pomodoro (25m)</span>
+                </button>
+
+                <!-- Zen Rain & Noise Sound Toggle -->
+                <button 
+                    id="btnToggleZenSound"
+                    class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-kz-card hover:bg-kz-card-hover border border-kz-border hover:border-kz-accent-calm/50 text-kz-text-primary text-xs font-semibold flex items-center gap-1.5 transition-all tooltip"
+                >
+                    <i id="zenSoundIcon" class="ph ph-waveform text-kz-accent-light text-sm"></i>
+                    <span id="zenSoundText" class="hidden md:inline">Zen Sound</span>
+                    <span id="zenSoundTooltip" class="tooltiptext">Play Calm Rain & Brown Noise</span>
+                </button>
+
+                <!-- AI Prompt Cheatsheet Modal Button -->
+                <button 
+                    id="btnOpenPrompts"
+                    class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-kz-card hover:bg-kz-card-hover border border-kz-border hover:border-kz-accent-calm/50 text-kz-text-primary text-xs font-semibold flex items-center gap-1.5 transition-all"
+                    title="Buka Cheatsheet Library Prompt AI"
+                >
+                    <i class="ph ph-sparkle text-amber-300 text-sm"></i>
+                    <span class="hidden sm:inline">Prompts</span>
+                </button>
+
+                <!-- Add Custom Tool Button -->
+                <button 
+                    id="btnOpenAddTool"
+                    class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-kz-card hover:bg-kz-card-hover border border-kz-border hover:border-kz-accent-calm/50 text-white text-xs font-semibold flex items-center gap-1.5 transition-all"
+                    title="Tambah Tool / Bookmark Web Kustom"
+                >
+                    <i class="ph ph-plus text-sm text-kz-accent-light"></i>
+                    <span class="hidden md:inline">Add Tool</span>
+                </button>
+
+                <!-- PWA Install Button (if available) -->
+                <button 
+                    id="btnInstallPWA"
+                    style="display: none;"
+                    class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-kz-accent-calm hover:bg-kz-accent-light text-kz-bg text-xs font-bold flex items-center gap-1.5 transition-colors shadow-sm"
+                >
+                    <i class="ph ph-download-simple text-sm"></i>
+                    <span>Install App</span>
+                </button>
+
+                <!-- Scratchpad & Notes Drawer Toggle -->
+                <button 
+                    id="btnToggleNotes"
+                    class="p-2 rounded-xl bg-kz-card hover:bg-kz-card-hover border border-kz-border text-kz-text-secondary hover:text-white transition-colors tooltip"
+                >
+                    <i class="ph ph-note-pencil text-lg"></i>
+                    <span class="tooltiptext">Scratchpad & Catatan</span>
+                </button>
+
+                <!-- Backup & Restore Modal Toggle -->
+                <button 
+                    id="btnOpenBackup"
+                    class="p-2 rounded-xl bg-kz-card hover:bg-kz-card-hover border border-kz-border text-kz-text-secondary hover:text-white transition-colors tooltip"
+                >
+                    <i class="ph ph-cloud-arrow-down text-lg"></i>
+                    <span class="tooltiptext">Backup / Export Workspace</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Pomodoro Quick Float Bar (Visible when opened) -->
+        <div id="pomodoroWidget" style="display: none;" class="bg-kz-card border-b border-kz-border px-4 py-2.5 flex items-center justify-between gap-4 max-w-7xl mx-auto w-full fade-in">
+            <div class="flex items-center gap-3">
+                <i class="ph ph-clock-countdown text-kz-accent-calm text-xl"></i>
+                <div>
+                    <div class="text-xs font-bold text-white flex items-center gap-2">
+                        <span id="pomodoroModeTitle">🎯 Focus Session</span>
+                        <span id="pomodoroTimerDisplay" class="text-xs font-mono text-kz-accent-light px-2 py-0.5 rounded bg-kz-bg border border-kz-border">
+                            25:00
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button 
+                    id="btnStartPausePomodoro"
+                    class="px-3 py-1 rounded-lg bg-kz-accent-calm hover:bg-kz-accent-light text-kz-bg text-xs font-bold transition-colors"
+                >
+                    Start
+                </button>
+                <button 
+                    id="btnResetPomodoro"
+                    class="px-2.5 py-1 rounded-lg bg-kz-bg hover:bg-[#252525] text-kz-text-secondary hover:text-white border border-kz-border text-xs transition-colors"
+                >
+                    Reset
+                </button>
+                <button 
+                    id="btnSwitchPomodoroMode"
+                    class="px-2.5 py-1 rounded-lg bg-kz-bg hover:bg-[#252525] text-kz-text-secondary hover:text-white border border-kz-border text-xs transition-colors"
+                >
+                    Switch to Break
+                </button>
+                <button id="btnClosePomodoro" class="p-1 text-kz-text-secondary hover:text-white ml-2">
+                    <i class="ph ph-x text-sm"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Quick Notes Scratchpad Panel (Drawer) -->
+        <div 
+            id="quickNotesDrawer"
+            style="display: none;"
+            class="fixed inset-y-0 right-0 w-80 sm:w-96 bg-kz-card border-l border-kz-border z-50 shadow-2xl p-5 pt-20 flex flex-col fade-in"
+        >
+            <div class="flex justify-between items-center mb-3">
+                <div class="flex items-center gap-2">
+                    <i class="ph ph-push-pin text-kz-accent-calm text-lg"></i>
+                    <h3 class="text-base font-bold text-white">Scratchpad & Notes</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="btnClearNotes" class="text-[11px] text-kz-text-secondary hover:text-red-400 transition-colors">Clear</button>
+                    <button id="btnCloseNotes" class="text-kz-text-secondary hover:text-white p-1"><i class="ph ph-x text-lg"></i></button>
+                </div>
+            </div>
+            <p class="text-[11px] text-kz-text-secondary mb-3">Autosaves continuously in your browser storage.</p>
+            <textarea 
+                id="quickNotesInput"
+                placeholder="Catat ide, to-do list, prompt draft, link penting di sini..."
+                class="flex-grow w-full bg-kz-bg border border-kz-border rounded-xl p-3.5 text-xs sm:text-sm text-white resize-none focus:outline-none focus:border-kz-accent-calm transition-colors leading-relaxed font-sans"
+            ></textarea>
+        </div>
+
+        <main class="flex-grow flex flex-col md:flex-row w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 gap-6 sm:gap-8">
+            
+            <!-- Left Sidebar / Navigation -->
+            <aside class="w-full md:w-64 flex-shrink-0 space-y-6">
+                
+                <!-- Daily Focus Card -->
+                <div class="bg-kz-card border border-kz-border rounded-2xl p-4 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[11px] font-bold tracking-wider text-kz-accent-light uppercase">Daily Focus</span>
+                        <i class="ph ph-target text-kz-accent-calm text-sm"></i>
+                    </div>
+                    <input 
+                        id="dailyFocusInput"
+                        type="text" 
+                        placeholder="Apa target utama Anda hari ini?" 
+                        class="w-full bg-kz-bg border border-kz-border rounded-xl px-3 py-2 text-xs text-white placeholder:text-kz-text-secondary/60 focus:outline-none focus:border-kz-accent-calm transition-colors"
+                    >
+                    
+                    <!-- Daily Checklist Task -->
+                    <div class="pt-2 border-t border-kz-border/60">
+                        <div class="flex items-center justify-between text-[11px] text-kz-text-secondary mb-2">
+                            <span>Daily Tasks</span>
+                            <span id="tasksCounterDisplay" class="font-mono text-kz-accent-light">0/0</span>
+                        </div>
+                        
+                        <div class="flex gap-1.5 mb-2">
+                            <input 
+                                id="newTaskInput"
+                                type="text" 
+                                placeholder="+ Tambah tugas hari ini..."
+                                class="flex-grow bg-kz-bg border border-kz-border rounded-lg px-2.5 py-1.5 text-xs text-white placeholder:text-kz-text-secondary/50 focus:outline-none focus:border-kz-accent-calm"
+                            >
+                        </div>
+
+                        <!-- Task List -->
+                        <div id="dailyTasksContainer" class="space-y-1.5 max-h-36 overflow-y-auto pr-1">
+                            <!-- Injected by JS -->
+                        </div>
+
+                        <div id="clearTasksWrapper" style="display: none;" class="pt-1.5 text-right">
+                            <button id="btnClearCompletedTasks" class="text-[10px] text-kz-text-secondary hover:text-white transition-colors">
+                                Bersihkan yang selesai
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Views -->
+                <div class="space-y-1">
+                    <div class="px-3 pb-2 text-[10px] font-bold tracking-wider text-kz-text-secondary uppercase">
+                        Quick Views
+                    </div>
+                    
+                    <!-- All Tools -->
+                    <button 
+                        data-cat="all"
+                        class="cat-nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all bg-kz-accent-calm text-kz-bg shadow-sm"
+                    >
+                        <div class="flex items-center gap-2.5">
+                            <i class="ph ph-squares-four text-base"></i>
+                            <span>All Tools</span>
+                        </div>
+                        <span id="countAllTools" class="text-[11px] px-1.5 py-0.5 rounded bg-black/20 font-mono">0</span>
+                    </button>
+
+                    <!-- Favorites -->
+                    <button 
+                        data-cat="favorites"
+                        class="cat-nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all text-kz-text-secondary hover:text-white hover:bg-kz-card"
+                    >
+                        <div class="flex items-center gap-2.5">
+                            <i class="ph ph-heart text-base text-rose-400"></i>
+                            <span>Favorites</span>
+                        </div>
+                        <span id="countFavTools" class="text-[11px] px-1.5 py-0.5 rounded bg-kz-card font-mono">0</span>
+                    </button>
+
+                    <!-- Custom Bookmarks -->
+                    <button 
+                        data-cat="custom"
+                        class="cat-nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all text-kz-text-secondary hover:text-white hover:bg-kz-card"
+                    >
+                        <div class="flex items-center gap-2.5">
+                            <i class="ph ph-bookmark-simple text-base text-amber-400"></i>
+                            <span>My Custom Tools</span>
+                        </div>
+                        <span id="countCustomTools" class="text-[11px] px-1.5 py-0.5 rounded bg-kz-card font-mono">0</span>
+                    </button>
+                </div>
+
+                <!-- Non-AI Essentials -->
+                <div class="space-y-1 pt-2">
+                    <div class="px-3 pb-2 text-[10px] font-bold tracking-wider text-kz-text-secondary uppercase">
+                        Everyday Essentials
+                    </div>
+                    <div id="nonAICategoriesList" class="space-y-1">
+                        <!-- Injected by JS -->
+                    </div>
+                </div>
+
+                <!-- AI Categories -->
+                <div class="space-y-1 pt-2">
+                    <div class="px-3 pb-2 text-[10px] font-bold tracking-wider text-kz-text-secondary uppercase">
+                        AI Categories
+                    </div>
+                    <div id="aiCategoriesList" class="space-y-1">
+                        <!-- Injected by JS -->
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- Main Content Area -->
+            <section class="flex-grow min-w-0">
+                
+                <!-- Role / Persona Quick Filter Pills -->
+                <div class="mb-5 p-1.5 rounded-2xl bg-kz-card border border-kz-border flex items-center gap-1.5 overflow-x-auto text-xs">
+                    <span class="text-[11px] font-bold text-kz-text-secondary px-3 uppercase tracking-wider whitespace-nowrap flex items-center gap-1">
+                        <i class="ph ph-user-circle"></i> Role:
+                    </span>
+                    <div id="rolesListContainer" class="flex items-center gap-1.5">
+                        <!-- Injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Search and Filter Bar -->
+                <div class="mb-6 flex flex-col sm:flex-row gap-3">
+                    
+                    <!-- Search Input -->
+                    <div class="relative flex-grow">
+                        <i class="ph ph-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-kz-text-secondary text-base"></i>
+                        <input 
+                            id="globalSearchInput"
+                            type="text" 
+                            placeholder="Cari tools atau ketik query dan tekan Enter untuk AI search..." 
+                            class="w-full bg-kz-card border border-kz-border rounded-xl pl-10 pr-10 py-2.5 text-xs sm:text-sm text-white placeholder:text-kz-text-secondary focus:outline-none focus:border-kz-accent-calm transition-colors"
+                        >
+                        <button 
+                            id="btnClearSearch"
+                            style="display: none;"
+                            class="absolute right-3.5 top-1/2 -translate-y-1/2 text-kz-text-secondary hover:text-white"
+                        >
+                            <i class="ph ph-x-circle text-base"></i>
+                        </button>
+                    </div>
+
+                    <!-- Pricing Filter Pills -->
+                    <div id="pricingFilterContainer" class="flex items-center gap-1 p-1 rounded-xl bg-kz-card border border-kz-border">
+                        <!-- Injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Direct AI Search Launcher Bar (Active when user types a query) -->
+                <div id="aiDirectSearchBanner" style="display: none;" class="mb-5 p-2.5 rounded-xl bg-kz-card border border-kz-accent-calm/30 flex flex-wrap items-center justify-between gap-2 fade-in">
+                    <div class="flex items-center gap-2 text-xs text-kz-text-secondary">
+                        <i class="ph ph-lightning text-amber-400 text-sm"></i>
+                        <span>Tanya langsung AI tentang "<strong id="searchQueryLabel" class="text-white font-medium"></strong>":</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button 
+                            onclick="quickSearchAI('perplexity')"
+                            class="px-2.5 py-1 rounded-lg bg-kz-bg hover:bg-kz-border text-white text-[11px] font-medium border border-kz-border flex items-center gap-1 transition-colors"
+                        >
+                            <i class="ph ph-globe-hemisphere-west text-kz-accent-light"></i>
+                            Perplexity
+                        </button>
+                        <button 
+                            onclick="quickSearchAI('chatgpt')"
+                            class="px-2.5 py-1 rounded-lg bg-kz-bg hover:bg-kz-border text-white text-[11px] font-medium border border-kz-border flex items-center gap-1 transition-colors"
+                        >
+                            <i class="ph ph-chat-teardrop-text text-emerald-400"></i>
+                            ChatGPT
+                        </button>
+                        <button 
+                            onclick="quickSearchAI('claude')"
+                            class="px-2.5 py-1 rounded-lg bg-kz-bg hover:bg-kz-border text-white text-[11px] font-medium border border-kz-border flex items-center gap-1 transition-colors"
+                        >
+                            <i class="ph ph-brain text-orange-400"></i>
+                            Claude
+                        </button>
+                        <button 
+                            onclick="quickSearchAI('gemini')"
+                            class="px-2.5 py-1 rounded-lg bg-kz-bg hover:bg-kz-border text-white text-[11px] font-medium border border-kz-border flex items-center gap-1 transition-colors"
+                        >
+                            <i class="ph ph-sparkle text-blue-400"></i>
+                            Gemini
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section Title & Meta -->
+                <div class="mb-4 flex flex-wrap justify-between items-center gap-2">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 id="mainCategoryHeading" class="text-lg sm:text-xl font-bold text-white tracking-wide">All Tools & Intelligence</h2>
+                            <span id="mainRoleBadge" style="display: none;" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-kz-accent-calm/10 text-kz-accent-light border border-kz-accent-calm/20"></span>
+                        </div>
+                        <p id="mainCategorySubtitle" class="text-xs text-kz-text-secondary mt-0.5">Pilih tool untuk langsung membuka web aplikasinya di tab baru.</p>
+                    </div>
+
+                    <div class="flex items-center gap-2 text-xs text-kz-text-secondary">
+                        <span id="filteredToolsCountDisplay" class="font-semibold text-white font-mono">0</span>
+                        <span>Tools Tersedia</span>
+                    </div>
+                </div>
+
+                <!-- Grid of Tools -->
+                <div id="toolsGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
+                    <!-- Dynamic Tool Cards Injected by JS -->
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyToolsState" style="display: none;" class="text-center py-16 px-4 bg-kz-card border border-kz-border rounded-2xl space-y-3">
+                    <div class="w-12 h-12 rounded-full bg-kz-bg border border-kz-border flex items-center justify-center mx-auto text-kz-text-secondary">
+                        <i class="ph ph-magnifying-glass text-xl"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white">Tidak ada tool yang cocok</h3>
+                    <p class="text-xs text-kz-text-secondary max-w-sm mx-auto">Coba cari dengan kata kunci lain, atau reset filter kategori & harga.</p>
+                    <button 
+                        id="btnResetAllFilters"
+                        class="px-4 py-1.5 rounded-xl bg-kz-bg hover:bg-[#252525] border border-kz-border text-white text-xs font-semibold transition-colors"
+                    >
+                        Reset Filter
+                    </button>
+                </div>
+
+            </section>
+        </main>
+
+        <!-- ============================================================ -->
+        <!-- MODAL: ADD CUSTOM TOOL (Personal Bookmark) -->
+        <!-- ============================================================ -->
+        <div id="addToolModal" style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs fade-in">
+            <div class="bg-kz-card border border-kz-border rounded-2xl w-full max-w-md p-6 shadow-2xl flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <div class="p-2 rounded-xl bg-kz-accent-calm/20 text-kz-accent-light border border-kz-accent-calm/30">
+                            <i class="ph ph-plus-circle text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Tambah Custom Tool</h3>
+                            <p class="text-[11px] text-kz-text-secondary">Simpan web/tool favorit ke dashboard Anda</p>
+                        </div>
+                    </div>
+                    <button id="btnCloseAddToolModal" class="p-1 text-kz-text-secondary hover:text-white">
+                        <i class="ph ph-x text-lg"></i>
+                    </button>
+                </div>
+
+                <form id="addCustomToolForm" class="space-y-3.5 text-xs">
+                    <div>
+                        <label class="block text-kz-text-secondary font-semibold mb-1">Nama Aplikasi / Tool *</label>
+                        <input 
+                            id="customToolName"
+                            type="text" 
+                            required 
+                            placeholder="Contoh: Figma, Notion Workspace, Gemini Pro" 
+                            class="w-full bg-kz-bg border border-kz-border rounded-xl p-2.5 text-white focus:outline-none focus:border-kz-accent-calm"
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-kz-text-secondary font-semibold mb-1">Link / URL Website *</label>
+                        <input 
+                            id="customToolUrl"
+                            type="text" 
+                            required 
+                            placeholder="https://..." 
+                            class="w-full bg-kz-bg border border-kz-border rounded-xl p-2.5 text-white focus:outline-none focus:border-kz-accent-calm"
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-kz-text-secondary font-semibold mb-1">Deskripsi Singkat</label>
+                        <input 
+                            id="customToolDesc"
+                            type="text" 
+                            placeholder="Penjelasan fungsi singkat..." 
+                            class="w-full bg-kz-bg border border-kz-border rounded-xl p-2.5 text-white focus:outline-none focus:border-kz-accent-calm"
+                        >
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-kz-text-secondary font-semibold mb-1">Kategori</label>
+                            <select 
+                                id="customToolCat"
+                                class="w-full bg-kz-bg border border-kz-border rounded-xl p-2.5 text-white focus:outline-none focus:border-kz-accent-calm"
+                            >
+                                <option value="work">Work & Productivity</option>
+                                <option value="writing">Writing & Translate</option>
+                                <option value="learn">Learning & Study</option>
+                                <option value="dev">Development</option>
+                                <option value="video">Video & Design</option>
+                                <option value="creative">Creative Arts</option>
+                                <option value="growth">Personal Growth</option>
+                                <option value="comms">Comms & Email</option>
+                                <option value="media">Media & Entertainment</option>
+                                <option value="cloud">Cloud & Storage</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-kz-text-secondary font-semibold mb-1">Harga / Lisensi</label>
+                            <select 
+                                id="customToolPricing"
+                                class="w-full bg-kz-bg border border-kz-border rounded-xl p-2.5 text-white focus:outline-none focus:border-kz-accent-calm"
+                            >
+                                <option value="free">100% Free</option>
+                                <option value="freemium" selected>Freemium</option>
+                                <option value="paid">Paid / Trial</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-kz-text-secondary font-semibold mb-1">Pilih Ikon</label>
+                        <div id="iconPickerContainer" class="flex items-center gap-2 overflow-x-auto pb-1">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-2 pt-3 border-t border-kz-border">
+                        <button 
+                            type="button" 
+                            id="btnCancelAddTool"
+                            class="px-4 py-2 rounded-xl bg-kz-bg hover:bg-[#252525] text-kz-text-secondary hover:text-white border border-kz-border transition-colors font-medium"
+                        >
+                            Batal
+                        </button>
+                        <button 
+                            type="submit" 
+                            class="px-5 py-2 rounded-xl bg-kz-accent-calm hover:bg-kz-accent-light text-kz-bg font-bold transition-colors shadow-sm"
+                        >
+                            Simpan Tool
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- MODAL: AI PROMPT CHEATSHEET & LIBRARY -->
+        <!-- ============================================================ -->
+        <div id="promptModal" style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs fade-in">
+            <div class="bg-kz-card border border-kz-border rounded-2xl w-full max-w-3xl max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
+                <!-- Header -->
+                <div class="p-5 border-b border-kz-border flex items-center justify-between bg-[#191919]">
+                    <div class="flex items-center gap-2.5">
+                        <div class="p-2 rounded-xl bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                            <i class="ph ph-sparkle text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">AI Prompt Cheatsheet Library</h3>
+                            <p class="text-xs text-kz-text-secondary">Koleksi prompt berkualitas tinggi siap salin untuk ChatGPT, Claude & Gemini</p>
+                        </div>
+                    </div>
+                    <button id="btnClosePromptModal" class="p-1.5 rounded-lg text-kz-text-secondary hover:text-white hover:bg-[#252525]">
+                        <i class="ph ph-x text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Category Tabs for Prompts -->
+                <div id="promptCategoryTabs" class="flex items-center gap-2 p-3 bg-kz-bg border-b border-kz-border overflow-x-auto text-xs">
+                    <!-- Injected by JS -->
+                </div>
+
+                <!-- Prompt Cards Body -->
+                <div id="promptsListContainer" class="p-5 overflow-y-auto space-y-4 text-xs">
+                    <!-- Injected by JS -->
+                </div>
+
+                <!-- Footer -->
+                <div class="p-3.5 bg-[#191919] border-t border-kz-border flex justify-end">
+                    <button 
+                        id="btnClosePromptModalFooter"
+                        class="px-4 py-1.5 rounded-xl bg-kz-card hover:bg-[#252525] border border-kz-border text-white text-xs font-semibold"
+                    >
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- MODAL: EXPORT & BACKUP WORKSPACE -->
+        <!-- ============================================================ -->
+        <div id="backupModal" style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs fade-in">
+            <div class="bg-kz-card border border-kz-border rounded-2xl w-full max-w-md p-6 shadow-2xl flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <div class="p-2 rounded-xl bg-kz-accent-calm/20 text-kz-accent-light border border-kz-accent-calm/30">
+                            <i class="ph ph-cloud-arrow-down text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Backup & Bagikan Workspace</h3>
+                            <p class="text-[11px] text-kz-text-secondary">Simpan dan pulihkan favorit, catatan & custom tools</p>
+                        </div>
+                    </div>
+                    <button id="btnCloseBackupModal" class="p-1 text-kz-text-secondary hover:text-white">
+                        <i class="ph ph-x text-lg"></i>
+                    </button>
+                </div>
+
+                <div class="space-y-4 text-xs">
+                    <div class="p-3.5 bg-kz-bg border border-kz-border rounded-xl space-y-2">
+                        <div class="font-bold text-white flex items-center gap-2">
+                            <i class="ph ph-download-simple text-kz-accent-calm text-base"></i>
+                            <span>1. Unduh File Backup (JSON)</span>
+                        </div>
+                        <p class="text-kz-text-secondary text-[11px]">
+                            Simpan semua data pribadi (Favorites, Custom Tools, Catatan Scratchpad, & Daily Focus) ke file JSON offline.
+                        </p>
+                        <button 
+                            id="btnDownloadBackupJSON"
+                            class="w-full py-2 rounded-xl bg-kz-accent-calm hover:bg-kz-accent-light text-kz-bg font-bold transition-colors"
+                        >
+                            Download kyzuch-backup.json
+                        </button>
+                    </div>
+
+                    <div class="p-3.5 bg-kz-bg border border-kz-border rounded-xl space-y-2">
+                        <div class="font-bold text-white flex items-center gap-2">
+                            <i class="ph ph-upload-simple text-amber-400 text-base"></i>
+                            <span>2. Pulihkan / Impor Backup</span>
+                        </div>
+                        <p class="text-kz-text-secondary text-[11px]">
+                            Unggah file JSON cadangan untuk menyinkronkan data antar perangkat atau browser.
+                        </p>
+                        <input 
+                            id="backupFileInput"
+                            type="file" 
+                            accept=".json" 
+                            class="w-full text-[11px] text-kz-text-secondary file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-kz-card file:text-white hover:file:bg-[#252525]"
+                        >
+                    </div>
+                </div>
+
+                <div class="flex justify-end pt-4 border-t border-kz-border mt-4">
+                    <button 
+                        id="btnCloseBackupModalFooter"
+                        class="px-4 py-2 rounded-xl bg-kz-bg hover:bg-[#252525] border border-kz-border text-white text-xs font-semibold"
+                    >
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-auto py-6 border-t border-kz-border text-center bg-[#101010]/80">
+            <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-kz-text-secondary">
+                <div class="flex items-center gap-2">
+                    <span class="font-logo font-bold text-white tracking-wider">KYZUCH</span>
+                    <span>• Universal AI Workstation</span>
+                </div>
+                <div class="flex items-center gap-4 text-[11px]">
+                    <span class="text-slate-500">Shortcut: Tekan <kbd class="px-1.5 py-0.5 rounded bg-kz-card border border-kz-border font-mono text-white">/</kbd> untuk mencari</span>
+                    <button id="btnFooterAddTool" class="hover:text-kz-accent-light transition-colors">+ Tambah Tool</button>
+                    <button id="btnFooterPrompts" class="hover:text-kz-accent-light transition-colors">AI Prompts</button>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PURE ROBUST JAVASCRIPT ENGINE (NO FRAMEWORK DEPENDENCIES) -->
+    <!-- ============================================================ -->
+    <script>
+        // Universal Safe Storage (Handles Sandboxed iframes in Google Apps Script)
+        const memoryStorage = {};
+        const safeStorage = {
+            getItem(key) {
+                try {
+                    if (typeof window !== 'undefined' && window.localStorage) {
+                        return window.localStorage.getItem(key);
+                    }
+                } catch (e) {}
+                return memoryStorage[key] || null;
+            },
+            setItem(key, value) {
+                try {
+                    if (typeof window !== 'undefined' && window.localStorage) {
+                        window.localStorage.setItem(key, value);
+                        return;
+                    }
+                } catch (e) {}
+                memoryStorage[key] = value;
+            },
+            removeItem(key) {
+                try {
+                    if (typeof window !== 'undefined' && window.localStorage) {
+                        window.localStorage.removeItem(key);
+                    }
+                } catch (e) {}
+                delete memoryStorage[key];
+            }
+        };
+
+        const safeJSON = (val, fallback) => {
+            try {
+                if (!val) return fallback;
+                return JSON.parse(val);
+            } catch (e) {
+                return fallback;
+            }
+        };
+
+        // Master App State
+        const state = {
+            selectedCategory: 'all',
+            selectedRole: 'all',
+            selectedPricing: 'all',
+            searchQuery: '',
+            favorites: safeJSON(safeStorage.getItem('kyzuch-favorites'), []),
+            customTools: safeJSON(safeStorage.getItem('kyzuch-custom-tools'), []),
+            dailyFocus: safeStorage.getItem('kyzuch-focus') || '',
+            dailyTasks: safeJSON(safeStorage.getItem('kyzuch-daily-tasks'), []),
+            quickNotes: safeStorage.getItem('kyzuch-notes') || '',
+            selectedPromptCategory: 'all',
+            selectedIcon: 'ph-app-window',
+            
+            // Pomodoro
+            pomodoroMode: 'work',
+            pomodoroSeconds: 25 * 60,
+            isPomodoroRunning: false,
+            pomodoroInterval: null,
+
+            // Zen Ambient Sound
+            isAmbientPlaying: false,
+            audioCtx: null,
+            noiseNode: null,
+            gainNode: null,
+
+            // PWA
+            deferredPrompt: null
+        };
+
+        // Categories Configuration
+        const categories = [
+            { id: 'work', name: 'Work & Productivity', icon: 'ph-briefcase' },
+            { id: 'writing', name: 'Writing & Translate', icon: 'ph-pen-nib' }, 
+            { id: 'learn', name: 'Learning & Study', icon: 'ph-student' },
+            { id: 'dev', name: 'Development', icon: 'ph-code' },
+            { id: 'video', name: 'Video & Design', icon: 'ph-video-camera' },
+            { id: 'creative', name: 'Creative Arts', icon: 'ph-palette' },
+            { id: 'growth', name: 'Personal Growth', icon: 'ph-plant' }
+        ];
+
+        const nonAIGroups = [
+            { id: 'comms', name: 'Comms & Email', icon: 'ph-envelope-simple' },
+            { id: 'media', name: 'Media & Entertainment', icon: 'ph-youtube-logo' },
+            { id: 'cloud', name: 'Cloud & Storage', icon: 'ph-cloud' }
+        ];
+
+        const rolesList = [
+            { id: 'all', name: 'All Roles', emoji: '🌐' },
+            { id: 'student', name: 'Student & Study', emoji: '🎓' },
+            { id: 'creator', name: 'Content Creator', emoji: '🎨' },
+            { id: 'business', name: 'Business & UMKM', emoji: '💼' },
+            { id: 'developer', name: 'Dev & Coding', emoji: '💻' },
+            { id: 'writer', name: 'Writer & Copy', emoji: '✍️' },
+            { id: 'growth', name: 'Mind & Growth', emoji: '🌱' }
+        ];
+
+        const pricingOptions = [
+            { id: 'all', label: 'All Pricing' },
+            { id: 'free', label: 'Free' },
+            { id: 'freemium', label: 'Freemium' },
+            { id: 'paid', label: 'Paid' }
+        ];
+
+        const iconPickerList = [
+            'ph-app-window', 'ph-globe', 'ph-code', 'ph-robot', 'ph-palette', 
+            'ph-video-camera', 'ph-sparkle', 'ph-lightning', 'ph-bookmark', 'ph-briefcase'
+        ];
+
+        // Master Base Tools
+        const baseTools = [
+            // Everyday Essentials (Non-AI)
+            { name: 'Gmail', category: 'comms', roles: ['business', 'student', 'developer', 'creator', 'writer'], pricing: 'free', description: 'Primary email client for work, clients, and communication.', url: 'https://mail.google.com', icon: 'ph-envelope-open', tags: ['Email', 'Essential'] },
+            { name: 'WhatsApp Web', category: 'comms', roles: ['business', 'student', 'creator'], pricing: 'free', description: 'Quick instant messaging right from the desktop browser.', url: 'https://web.whatsapp.com', icon: 'ph-chat-circle-dots', tags: ['Chat', 'Social'] },
+            { name: 'Discord', category: 'comms', roles: ['developer', 'creator', 'student'], pricing: 'free', description: 'Developer and creator community servers and voice channels.', url: 'https://discord.com/app', icon: 'ph-discord-logo', tags: ['Community', 'Gaming'] },
+            { name: 'YouTube', category: 'media', roles: ['student', 'creator', 'developer'], pricing: 'freemium', description: 'Video tutorials, educational content, podcasts, and media.', url: 'https://youtube.com', icon: 'ph-youtube-logo', tags: ['Video', 'Learning'] },
+            { name: 'Spotify', category: 'media', roles: ['growth', 'student', 'developer'], pricing: 'freemium', description: 'Music player for binaural beats, lofi focus, and podcasts.', url: 'https://open.spotify.com', icon: 'ph-headphones', tags: ['Music', 'Focus'] },
+            { name: 'Pinterest', category: 'media', roles: ['creator', 'business'], pricing: 'free', description: 'Visual moodboards, design inspiration, and creative ideas.', url: 'https://pinterest.com', icon: 'ph-pinterest-logo', tags: ['Inspiration', 'Images'] },
+            { name: 'Google Drive', category: 'cloud', roles: ['business', 'student', 'creator'], pricing: 'freemium', description: 'Main cloud storage, documents, sheets, and file sharing.', url: 'https://drive.google.com', icon: 'ph-google-drive-logo', tags: ['Storage', 'Files'] },
+            { name: 'GitHub', category: 'cloud', roles: ['developer'], pricing: 'freemium', description: 'Git version control, repositories, actions, and code hosting.', url: 'https://github.com', icon: 'ph-github-logo', tags: ['Code', 'Repo'] },
+
+            // AI Work & Productivity
+            { name: 'ChatGPT', category: 'work', roles: ['business', 'student', 'developer', 'writer', 'creator'], pricing: 'freemium', description: 'Go-to general AI assistant for drafting, problem solving, and logic.', url: 'https://chat.openai.com', icon: 'ph-chat-teardrop-text', tags: ['Assistant', 'General'] },
+            { name: 'Claude', category: 'work', roles: ['business', 'student', 'developer', 'writer'], pricing: 'freemium', description: 'Superb long-context reasoning, natural nuance, and document analysis.', url: 'https://claude.ai', icon: 'ph-brain', tags: ['Analysis', 'Writing'] },
+            { name: 'Google Gemini', category: 'work', roles: ['business', 'student', 'developer', 'writer'], pricing: 'freemium', description: 'Multimodal AI assistant integrated with Google Ecosystem & real-time search.', url: 'https://gemini.google.com', icon: 'ph-sparkle', tags: ['Google AI', 'Search'] },
+            { name: 'Notion AI', category: 'work', roles: ['business', 'student', 'writer'], pricing: 'freemium', description: 'All-in-one workspace with AI-powered summaries, docs, and database.', url: 'https://notion.so', icon: 'ph-notebook', tags: ['Workspace', 'Notes'] },
+            
+            // Writing & Translation
+            { name: 'Grammarly', category: 'writing', roles: ['writer', 'student', 'business'], pricing: 'freemium', description: 'AI grammar, tone, clarity, and spelling assistant.', url: 'https://app.grammarly.com', icon: 'ph-text-aa', tags: ['Grammar', 'Editing'] },
+            { name: 'DeepL', category: 'writing', roles: ['writer', 'student', 'business'], pricing: 'freemium', description: 'Highly accurate natural AI language translator.', url: 'https://www.deepl.com', icon: 'ph-translate', tags: ['Translation', 'Languages'] },
+            { name: 'QuillBot', category: 'writing', roles: ['student', 'writer'], pricing: 'freemium', description: 'AI paraphrasing tool to rewrite sentences without losing meaning.', url: 'https://quillbot.com', icon: 'ph-feather', tags: ['Paraphrase', 'Academic'] },
+
+            // Learning & Study
+            { name: 'Perplexity AI', category: 'learn', roles: ['student', 'business', 'developer', 'writer'], pricing: 'freemium', description: 'AI search engine providing direct answers with live web citations.', url: 'https://www.perplexity.ai', icon: 'ph-globe-hemisphere-west', tags: ['Research', 'Search'] },
+            { name: 'Explain Like I\'m 5', category: 'learn', roles: ['student', 'growth'], pricing: 'free', description: 'Simplifies complex theories into clear, simple analogies.', url: 'https://explainlikeimfive.io/', icon: 'ph-baby', tags: ['Simplifier', 'Study'] },
+            { name: 'Consensus AI', category: 'learn', roles: ['student', 'writer'], pricing: 'freemium', description: 'Search scientific research papers and peer-reviewed studies with AI.', url: 'https://consensus.app', icon: 'ph-books', tags: ['Research', 'Science'] },
+
+            // Development
+            { name: 'Phind', category: 'dev', roles: ['developer'], pricing: 'freemium', description: 'Intelligent search engine crafted specifically for software engineers.', url: 'https://www.phind.com', icon: 'ph-magnifying-glass-plus', tags: ['Dev Search', 'Coding'] },
+            { name: 'Vercel v0', category: 'dev', roles: ['developer', 'creator'], pricing: 'freemium', description: 'Generative UI system to build React & Tailwind components from prompts.', url: 'https://v0.dev', icon: 'ph-browser', tags: ['UI/UX', 'Frontend'] },
+            { name: 'Bolt.new', category: 'dev', roles: ['developer'], pricing: 'freemium', description: 'In-browser full-stack development environment with AI agent.', url: 'https://bolt.new', icon: 'ph-lightning', tags: ['FullStack', 'IDE'] },
+
+            // Video & Design
+            { name: 'Canva', category: 'video', roles: ['creator', 'business', 'student'], pricing: 'freemium', description: 'Graphic design suite with Magic Studio AI generation and templates.', url: 'https://canva.com', icon: 'ph-paint-brush-broad', tags: ['Design', 'Graphics'] },
+            { name: 'CapCut Web', category: 'video', roles: ['creator', 'business'], pricing: 'freemium', description: 'Fast video editor with automated subtitles and viral effects.', url: 'https://capcut.com', icon: 'ph-film-strip', tags: ['Video', 'Captions'] },
+            { name: 'Clipdrop', category: 'video', roles: ['creator', 'business'], pricing: 'freemium', description: 'Background removal, relighting, and image upscaling tools.', url: 'https://clipdrop.co', icon: 'ph-scissors', tags: ['Image Tool', 'Upscale'] },
+
+            // Creative Arts & Audio
+            { name: 'Midjourney', category: 'creative', roles: ['creator'], pricing: 'paid', description: 'State-of-the-art photorealistic AI image generation.', url: 'https://www.midjourney.com', icon: 'ph-image', tags: ['Images', 'Art'] },
+            { name: 'Suno', category: 'creative', roles: ['creator'], pricing: 'freemium', description: 'Generate full radio-quality songs and lyrics from text descriptions.', url: 'https://suno.com', icon: 'ph-music-notes', tags: ['Audio', 'Music'] },
+            { name: 'ElevenLabs', category: 'creative', roles: ['creator', 'business'], pricing: 'freemium', description: 'Hyper-realistic AI voice cloning and text-to-speech synthesis.', url: 'https://elevenlabs.io', icon: 'ph-waveform', tags: ['Voice', 'TTS'] },
+
+            // Personal Growth & Wellbeing
+            { name: 'Pi AI', category: 'growth', roles: ['growth'], pricing: 'free', description: 'Empathetic, conversational AI companion for reflection and thought organization.', url: 'https://pi.ai', icon: 'ph-heart-beat', tags: ['Mental Health', 'Companion'] },
+            { name: 'Goblin.tools', category: 'growth', roles: ['growth', 'student'], pricing: 'free', description: 'Breaks down overwhelming tasks into bite-sized actionable steps (ADHD friendly).', url: 'https://goblin.tools', icon: 'ph-list-checks', tags: ['Tasks', 'ADHD Support'] }
+        ];
+
+        // Prompts Library
+        const promptCategories = [
+            { id: 'all', name: 'Semua Prompt' },
+            { id: 'business', name: '💼 Bisnis & Copywriting' },
+            { id: 'study', name: '🎓 Belajar & Riset' },
+            { id: 'coding', name: '💻 Coding & Debug' },
+            { id: 'creative', name: '🎨 Visual & Konten' }
+        ];
+
+        const promptLibrary = [
+            {
+                category: 'study',
+                title: 'Teknik Feynman (Penjelas Konsep)',
+                target: 'ChatGPT / Claude',
+                description: 'Menyederhanakan konsep rumit menjadi penjelasan mudah dipahami anak 12 tahun lengkap dengan analogi.',
+                text: 'Jelaskan konsep [MASUKKAN TOPIK, misal: Quantum Computing / Inflasi] menggunakan Teknik Feynman. Gunakan bahasa yang sangat sederhana, hindari jargon berlebihan, berikan 2 analogi dunia nyata, dan akhiri dengan 3 pertanyaan cek pemahaman.'
+            },
+            {
+                category: 'business',
+                title: 'Framework PAS (Pain-Agitate-Solve) Copywriting',
+                target: 'Copywriting / Iklan',
+                description: 'Membuat narasi penawaran produk yang memikat untuk caption Instagram atau landing page.',
+                text: 'Bertindaklah sebagai Senior Direct-Response Copywriter. Buatkan copy penawaran untuk produk [MASUKKAN PRODUK & TARGET AUDIENCE] menggunakan formula PAS (Pain, Agitate, Solution). Sertakan Hook pembuka yang kuat dan CTA (Call to Action) yang jelas.'
+            },
+            {
+                category: 'coding',
+                title: 'Senior Code Review & Optimization',
+                target: 'ChatGPT / Phind',
+                description: 'Audit kode untuk keamanan, efisiensi O(n), dan clean code architecture.',
+                text: 'Bertindaklah sebagai Principal Software Architect. Review kode berikut ini:\n\n[PASTE KODE ANDA]\n\nBerikan analisis:\n1. Potensi bug atau edge-cases yang belum tertangani.\n2. Analisis kompleksitas waktu & memori.\n3. Kode refactor versi clean code yang lebih optimal.'
+            },
+            {
+                category: 'creative',
+                title: 'Midjourney Photorealistic Product Shot',
+                target: 'Midjourney / Flux',
+                description: 'Prompt visual foto produk komersial berkualitas studio 8k.',
+                text: '/imagine prompt: Commercial studio product photography of [NAMA PRODUK], placed on modern minimalist dark slate stone pedestal, soft ambient cinematic rim lighting, water droplets, ultra-sharp focus, shot on Hasselblad 100mm f/2.8 lens, 8k resolution, photorealistic, clean composition --ar 16:9 --v 6.0'
+            },
+            {
+                category: 'business',
+                title: 'Analisis 80/20 (Prinsip Pareto) untuk Produktivitas',
+                target: 'Strategy / Claude',
+                description: 'Mengidentifikasi 20% aktivitas kunci yang memberikan 80% dampak bisnis/belajar.',
+                text: 'Saya sedang menjalankan [MASUKKAN PROYEK/BISNIS/TARGET]. Berikut daftar tugas harian saya: [DAFTAR TUGAS]. Analisis menggunakan Prinsip Pareto (80/20): Identifikasi 20% tugas yang paling menghasilkan dampak terbesar dan rekomendasikan apa saja yang harus didelegasikan atau dieliminasi.'
+            }
+        ];
+
+        // Core Helper Functions
+        function getAllTools() {
+            return [...state.customTools, ...baseTools];
+        }
+
+        function getFilteredTools() {
+            let list = getAllTools();
+
+            // Filter Category
+            if (state.selectedCategory === 'favorites') {
+                list = list.filter(t => state.favorites.includes(t.name));
+            } else if (state.selectedCategory === 'custom') {
+                list = list.filter(t => t.isCustom);
+            } else if (state.selectedCategory !== 'all') {
+                list = list.filter(t => t.category === state.selectedCategory);
+            }
+
+            // Filter Role
+            if (state.selectedRole !== 'all') {
+                list = list.filter(t => {
+                    if (t.isCustom) return true;
+                    return t.roles && t.roles.includes(state.selectedRole);
+                });
+            }
+
+            // Filter Pricing
+            if (state.selectedPricing !== 'all') {
+                list = list.filter(t => t.pricing === state.selectedPricing);
+            }
+
+            // Filter Search Query
+            if (state.searchQuery.trim() !== '') {
+                const q = state.searchQuery.toLowerCase();
+                list = list.filter(t => 
+                    t.name.toLowerCase().includes(q) ||
+                    (t.description && t.description.toLowerCase().includes(q)) ||
+                    (t.tags && t.tags.some(tag => tag.toLowerCase().includes(q)))
+                );
+            }
+
+            return list;
+        }
+
+        // Render Functions
+        function renderSidebar() {
+            const allTools = getAllTools();
+            const favCount = allTools.filter(t => state.favorites.includes(t.name)).length;
+            const customCount = state.customTools.length;
+
+            document.getElementById('countAllTools').textContent = allTools.length;
+            document.getElementById('countFavTools').textContent = favCount;
+            document.getElementById('countCustomTools').textContent = customCount;
+
+            // Non-AI Essentials
+            const nonAIContainer = document.getElementById('nonAICategoriesList');
+            nonAIContainer.innerHTML = nonAIGroups.map(cat => {
+                const isActive = state.selectedCategory === cat.id;
+                const count = allTools.filter(t => t.category === cat.id).length;
+                return `
+                    <button 
+                        data-cat="${cat.id}"
+                        class="cat-nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
+                            isActive 
+                                ? 'bg-kz-accent-calm text-kz-bg shadow-sm' 
+                                : 'text-kz-text-secondary hover:text-white hover:bg-kz-card'
+                        }"
+                    >
+                        <div class="flex items-center gap-2.5">
+                            <i class="ph ${cat.icon} text-base"></i>
+                            <span>${cat.name}</span>
+                        </div>
+                        <span class="text-[11px] px-1.5 py-0.5 rounded ${isActive ? 'bg-black/20' : 'bg-kz-card'} font-mono">${count}</span>
+                    </button>
+                `;
+            }).join('');
+
+            // AI Categories
+            const aiContainer = document.getElementById('aiCategoriesList');
+            aiContainer.innerHTML = categories.map(cat => {
+                const isActive = state.selectedCategory === cat.id;
+                const count = allTools.filter(t => t.category === cat.id).length;
+                return `
+                    <button 
+                        data-cat="${cat.id}"
+                        class="cat-nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
+                            isActive 
+                                ? 'bg-kz-accent-calm text-kz-bg shadow-sm' 
+                                : 'text-kz-text-secondary hover:text-white hover:bg-kz-card'
+                        }"
+                    >
+                        <div class="flex items-center gap-2.5">
+                            <i class="ph ${cat.icon} text-base"></i>
+                            <span>${cat.name}</span>
+                        </div>
+                        <span class="text-[11px] px-1.5 py-0.5 rounded ${isActive ? 'bg-black/20' : 'bg-kz-card'} font-mono">${count}</span>
+                    </button>
+                `;
+            }).join('');
+
+            // Update active state on static quick view buttons
+            document.querySelectorAll('.cat-nav-btn').forEach(btn => {
+                const cat = btn.getAttribute('data-cat');
+                const isActive = state.selectedCategory === cat;
+                if (isActive) {
+                    btn.className = 'cat-nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all bg-kz-accent-calm text-kz-bg shadow-sm';
+                    const span = btn.querySelector('span:last-child');
+                    if (span) span.className = 'text-[11px] px-1.5 py-0.5 rounded bg-black/20 font-mono';
+                } else {
+                    btn.className = 'cat-nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all text-kz-text-secondary hover:text-white hover:bg-kz-card';
+                    const span = btn.querySelector('span:last-child');
+                    if (span) span.className = 'text-[11px] px-1.5 py-0.5 rounded bg-kz-card font-mono';
+                }
+            });
+
+            // Bind click events on all category buttons
+            document.querySelectorAll('.cat-nav-btn').forEach(btn => {
+                btn.onclick = () => {
+                    state.selectedCategory = btn.getAttribute('data-cat');
+                    render();
+                };
+            });
+        }
+
+        function renderRoles() {
+            const container = document.getElementById('rolesListContainer');
+            container.innerHTML = rolesList.map(r => {
+                const isActive = state.selectedRole === r.id;
+                return `
+                    <button 
+                        data-role="${r.id}"
+                        class="role-pill-btn px-3 py-1 rounded-xl font-medium whitespace-nowrap transition-all border ${
+                            isActive 
+                                ? 'bg-kz-accent-calm text-kz-bg border-kz-accent-calm font-bold' 
+                                : 'bg-kz-bg text-kz-text-secondary border-kz-border hover:text-white'
+                        }"
+                    >
+                        ${r.emoji} ${r.name}
+                    </button>
+                `;
+            }).join('');
+
+            container.querySelectorAll('.role-pill-btn').forEach(btn => {
+                btn.onclick = () => {
+                    state.selectedRole = btn.getAttribute('data-role');
+                    render();
+                };
+            });
+        }
+
+        function renderPricingFilters() {
+            const container = document.getElementById('pricingFilterContainer');
+            container.innerHTML = pricingOptions.map(p => {
+                const isActive = state.selectedPricing === p.id;
+                return `
+                    <button 
+                        data-pricing="${p.id}"
+                        class="pricing-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+                            isActive 
+                                ? 'bg-kz-accent-calm text-kz-bg' 
+                                : 'text-kz-text-secondary hover:text-white'
+                        }"
+                    >
+                        ${p.label}
+                    </button>
+                `;
+            }).join('');
+
+            container.querySelectorAll('.pricing-pill-btn').forEach(btn => {
+                btn.onclick = () => {
+                    state.selectedPricing = btn.getAttribute('data-pricing');
+                    render();
+                };
+            });
+        }
+
+        function renderHeaderTitles(filteredCount) {
+            let catName = 'All Tools & Intelligence';
+            let subtitle = 'Pilih tool untuk langsung membuka web aplikasinya di tab baru.';
+
+            if (state.selectedCategory === 'favorites') {
+                catName = 'My Favorites';
+                subtitle = 'Aplikasi yang Anda tandai dengan bintang/hati.';
+            } else if (state.selectedCategory === 'custom') {
+                catName = 'My Custom Bookmarks';
+                subtitle = 'Koleksi bookmark website pribadi Anda yang tersimpan di browser.';
+            } else if (state.selectedCategory !== 'all') {
+                const found = [...categories, ...nonAIGroups].find(c => c.id === state.selectedCategory);
+                if (found) catName = found.name;
+            } else if (state.selectedRole !== 'all') {
+                const r = rolesList.find(x => x.id === state.selectedRole);
+                if (r) catName = `${r.emoji} ${r.name} Pack`;
+            }
+
+            document.getElementById('mainCategoryHeading').textContent = catName;
+            document.getElementById('mainCategorySubtitle').textContent = subtitle;
+            document.getElementById('filteredToolsCountDisplay').textContent = filteredCount;
+
+            const roleBadge = document.getElementById('mainRoleBadge');
+            if (state.selectedRole !== 'all') {
+                const r = rolesList.find(x => x.id === state.selectedRole);
+                roleBadge.style.display = 'inline-block';
+                roleBadge.textContent = `Role: ${r ? r.name : 'All'}`;
+            } else {
+                roleBadge.style.display = 'none';
+            }
+
+            // Direct search banner
+            const banner = document.getElementById('aiDirectSearchBanner');
+            const qLabel = document.getElementById('searchQueryLabel');
+            const btnClear = document.getElementById('btnClearSearch');
+            if (state.searchQuery.trim().length > 0) {
+                banner.style.display = 'flex';
+                qLabel.textContent = state.searchQuery;
+                btnClear.style.display = 'block';
+            } else {
+                banner.style.display = 'none';
+                btnClear.style.display = 'none';
+            }
+        }
+
+        function renderToolsGrid() {
+            const filtered = getFilteredTools();
+            renderHeaderTitles(filtered.length);
+
+            const grid = document.getElementById('toolsGridContainer');
+            const emptyState = document.getElementById('emptyToolsState');
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            grid.innerHTML = filtered.map(tool => {
+                const isFav = state.favorites.includes(tool.name);
+                const pricingBadgeClass = 
+                    tool.pricing === 'free' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' :
+                    tool.pricing === 'paid' ? 'text-rose-400 bg-rose-500/10 border-rose-500/20' :
+                    'text-amber-400 bg-amber-500/10 border-amber-500/20';
+
+                return `
+                    <div class="group bg-kz-card border border-kz-border hover:border-kz-accent-calm/60 rounded-2xl p-4 flex flex-col justify-between transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/40 relative">
+                        <div>
+                            <!-- Card Top Bar: Icon, Tags, Favorite Toggle -->
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <div class="w-9 h-9 rounded-xl bg-kz-bg border border-kz-border flex items-center justify-center text-kz-accent-light group-hover:border-kz-accent-calm/40 transition-colors">
+                                    <i class="ph ${tool.icon || 'ph-app-window'} text-lg"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    ${tool.isCustom ? `
+                                        <button 
+                                            onclick="deleteCustomTool('${encodeURIComponent(tool.name)}')"
+                                            class="p-1 rounded-lg text-kz-text-secondary hover:text-red-400 transition-colors"
+                                            title="Hapus bookmark"
+                                        >
+                                            <i class="ph ph-trash text-sm"></i>
+                                        </button>
+                                    ` : ''}
+                                    <button 
+                                        onclick="toggleFavorite('${encodeURIComponent(tool.name)}')"
+                                        class="p-1.5 rounded-lg text-kz-text-secondary hover:text-rose-400 transition-colors"
+                                        title="Simpan ke Favorit"
+                                    >
+                                        <i class="ph ${isFav ? 'ph-heart-fill text-rose-500' : 'ph-heart'} text-base"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Tool Title & Description -->
+                            <div class="space-y-1 mb-3">
+                                <div class="flex items-center gap-1.5 flex-wrap">
+                                    <h3 class="text-sm font-bold text-white group-hover:text-kz-accent-light transition-colors">${tool.name}</h3>
+                                    ${tool.isCustom ? `
+                                        <span class="px-1.5 py-0.2 rounded text-[9px] uppercase font-bold tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                                            Custom
+                                        </span>
+                                    ` : ''}
+                                </div>
+                                <p class="text-xs text-kz-text-secondary line-clamp-2 leading-relaxed font-sans">
+                                    ${tool.description || 'Quick launch website bookmark'}
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card Footer -->
+                        <div class="pt-3 border-t border-kz-border/70 flex items-center justify-between text-[11px] gap-2">
+                            <span class="px-2 py-0.5 rounded-md font-semibold capitalize border ${pricingBadgeClass}">
+                                ${tool.pricing || 'Freemium'}
+                            </span>
+                            
+                            <a 
+                                href="${tool.url}" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                class="px-3 py-1 rounded-lg bg-kz-bg hover:bg-kz-accent-calm hover:text-kz-bg text-white border border-kz-border font-semibold flex items-center gap-1 transition-all group-hover:border-kz-accent-calm/50"
+                            >
+                                <span>Buka Web</span>
+                                <i class="ph ph-arrow-square-out text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderDailyTasks() {
+            const container = document.getElementById('dailyTasksContainer');
+            const counter = document.getElementById('tasksCounterDisplay');
+            const clearWrapper = document.getElementById('clearTasksWrapper');
+
+            const completed = state.dailyTasks.filter(t => t.completed).length;
+            const total = state.dailyTasks.length;
+            counter.textContent = `${completed}/${total}`;
+
+            if (state.dailyTasks.length === 0) {
+                container.innerHTML = '<p class="text-[11px] text-kz-text-secondary/60 italic py-1">Belum ada tugas hari ini</p>';
+                clearWrapper.style.display = 'none';
+                return;
+            }
+
+            clearWrapper.style.display = completed > 0 ? 'block' : 'none';
+            container.innerHTML = state.dailyTasks.map((t, idx) => `
+                <div class="flex items-center justify-between gap-2 text-xs py-1 group/item">
+                    <label class="flex items-center gap-2 cursor-pointer select-none flex-grow min-w-0">
+                        <input 
+                            type="checkbox" 
+                            ${t.completed ? 'checked' : ''}
+                            onchange="toggleTask(${idx})"
+                            class="rounded bg-kz-bg border-kz-border text-kz-accent-calm focus:ring-0 w-3.5 h-3.5"
+                        >
+                        <span class="truncate ${t.completed ? 'line-through text-kz-text-secondary' : 'text-white'}">${t.text}</span>
+                    </label>
+                    <button 
+                        onclick="deleteTask(${idx})" 
+                        class="text-kz-text-secondary/40 hover:text-red-400 opacity-0 group-hover/item:opacity-100 transition-opacity p-0.5"
+                    >
+                        <i class="ph ph-x text-xs"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function renderPrompts() {
+            // Category Tabs
+            const tabsContainer = document.getElementById('promptCategoryTabs');
+            tabsContainer.innerHTML = promptCategories.map(cat => {
+                const isActive = state.selectedPromptCategory === cat.id;
+                return `
+                    <button 
+                        onclick="selectPromptCategory('${cat.id}')"
+                        class="px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-all border ${
+                            isActive 
+                                ? 'bg-kz-accent-calm text-kz-bg border-kz-accent-calm' 
+                                : 'bg-kz-card text-kz-text-secondary border-kz-border hover:text-white'
+                        }"
+                    >
+                        ${cat.name}
+                    </button>
+                `;
+            }).join('');
+
+            // Prompt Cards
+            const promptsContainer = document.getElementById('promptsListContainer');
+            let list = promptLibrary;
+            if (state.selectedPromptCategory !== 'all') {
+                list = list.filter(p => p.category === state.selectedPromptCategory);
+            }
+
+            promptsContainer.innerHTML = list.map(p => `
+                <div class="p-4 bg-kz-bg border border-kz-border rounded-xl space-y-2 hover:border-kz-accent-calm/40 transition-colors">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-white text-sm">${p.title}</span>
+                            <span class="text-[10px] uppercase font-bold text-kz-accent-light px-2 py-0.5 rounded bg-kz-accent-calm/10 border border-kz-accent-calm/30">
+                                ${p.target}
+                            </span>
+                        </div>
+                        <button 
+                            onclick="copyPromptText(this, \`${p.text.replace(/`/g, '\\`')}\`)" 
+                            class="px-3 py-1 rounded-lg bg-kz-card hover:bg-kz-accent-calm hover:text-kz-bg text-kz-text-primary border border-kz-border text-[11px] font-semibold flex items-center gap-1.5 transition-all"
+                        >
+                            <i class="ph ph-copy"></i>
+                            <span>Copy Prompt</span>
+                        </button>
+                    </div>
+                    <p class="text-kz-text-secondary text-[11px]">${p.description}</p>
+                    <pre class="p-3 bg-[#151515] border border-kz-border/80 rounded-lg text-slate-300 font-mono text-[11px] whitespace-pre-wrap leading-relaxed select-all">${p.text}</pre>
+                </div>
+            `).join('');
+        }
+
+        function renderIconPicker() {
+            const container = document.getElementById('iconPickerContainer');
+            container.innerHTML = iconPickerList.map(ico => {
+                const isActive = state.selectedIcon === ico;
+                return `
+                    <button 
+                        type="button"
+                        onclick="selectIcon('${ico}')"
+                        class="p-2 rounded-lg border flex items-center justify-center transition-colors ${
+                            isActive 
+                                ? 'bg-kz-accent-calm/20 text-kz-accent-light border-kz-accent-calm' 
+                                : 'bg-kz-bg border-kz-border text-kz-text-secondary hover:text-white'
+                        }"
+                    >
+                        <i class="ph ${ico} text-lg"></i>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function render() {
+            renderSidebar();
+            renderRoles();
+            renderPricingFilters();
+            renderToolsGrid();
+            renderDailyTasks();
+        }
+
+        // Global Action Handlers
+        window.toggleFavorite = function(encodedName) {
+            const name = decodeURIComponent(encodedName);
+            if (state.favorites.includes(name)) {
+                state.favorites = state.favorites.filter(n => n !== name);
+            } else {
+                state.favorites.push(name);
+            }
+            safeStorage.setItem('kyzuch-favorites', JSON.stringify(state.favorites));
+            render();
+        };
+
+        window.deleteCustomTool = function(encodedName) {
+            const name = decodeURIComponent(encodedName);
+            if (confirm(`Hapus "${name}" dari custom bookmark Anda?`)) {
+                state.customTools = state.customTools.filter(t => t.name !== name);
+                safeStorage.setItem('kyzuch-custom-tools', JSON.stringify(state.customTools));
+                render();
+            }
+        };
+
+        window.toggleTask = function(index) {
+            state.dailyTasks[index].completed = !state.dailyTasks[index].completed;
+            safeStorage.setItem('kyzuch-daily-tasks', JSON.stringify(state.dailyTasks));
+            renderDailyTasks();
+        };
+
+        window.deleteTask = function(index) {
+            state.dailyTasks.splice(index, 1);
+            safeStorage.setItem('kyzuch-daily-tasks', JSON.stringify(state.dailyTasks));
+            renderDailyTasks();
+        };
+
+        window.selectPromptCategory = function(catId) {
+            state.selectedPromptCategory = catId;
+            renderPrompts();
+        };
+
+        window.selectIcon = function(iconClass) {
+            state.selectedIcon = iconClass;
+            renderIconPicker();
+        };
+
+        window.copyPromptText = function(btn, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = '<i class="ph ph-check text-emerald-400 font-bold"></i><span class="text-emerald-400">Copied!</span>';
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                }, 2000);
+            });
+        };
+
+        window.quickSearchAI = function(engine) {
+            const q = encodeURIComponent(state.searchQuery);
+            let url = '';
+            if (engine === 'perplexity') url = `https://www.perplexity.ai/search?q=${q}`;
+            else if (engine === 'chatgpt') url = `https://chat.openai.com/?q=${q}`;
+            else if (engine === 'claude') url = `https://claude.ai/new?q=${q}`;
+            else if (engine === 'gemini') url = `https://gemini.google.com/app?q=${q}`;
+            if (url) window.open(url, '_blank');
+        };
+
+        // Pomodoro Engine
+        function updatePomodoroUI() {
+            const m = Math.floor(state.pomodoroSeconds / 60);
+            const s = state.pomodoroSeconds % 60;
+            const timeStr = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+            
+            document.getElementById('pomodoroTimerDisplay').textContent = timeStr;
+            document.getElementById('pomodoroModeTitle').textContent = state.pomodoroMode === 'work' ? '🎯 Focus Session' : '☕ Rest Break';
+            document.getElementById('btnStartPausePomodoro').textContent = state.isPomodoroRunning ? 'Pause' : 'Start';
+            document.getElementById('btnSwitchPomodoroMode').textContent = state.pomodoroMode === 'work' ? 'Switch to Break' : 'Switch to Work';
+            document.getElementById('pomodoroHeaderLabel').textContent = `Pomodoro (${timeStr})`;
+        }
+
+        function startPomodoro() {
+            if (state.isPomodoroRunning) {
+                clearInterval(state.pomodoroInterval);
+                state.isPomodoroRunning = false;
+                updatePomodoroUI();
+            } else {
+                state.isPomodoroRunning = true;
+                updatePomodoroUI();
+                state.pomodoroInterval = setInterval(() => {
+                    if (state.pomodoroSeconds > 0) {
+                        state.pomodoroSeconds--;
+                        updatePomodoroUI();
+                    } else {
+                        clearInterval(state.pomodoroInterval);
+                        state.isPomodoroRunning = false;
+                        playChime();
+                        alert(state.pomodoroMode === 'work' ? '🎉 Waktu fokus selesai! Istirahat 5 menit.' : '🔔 Waktu istirahat selesai! Siap fokus lagi?');
+                        switchPomodoroMode();
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetPomodoro() {
+            clearInterval(state.pomodoroInterval);
+            state.isPomodoroRunning = false;
+            state.pomodoroSeconds = state.pomodoroMode === 'work' ? 25 * 60 : 5 * 60;
+            updatePomodoroUI();
+        }
+
+        function switchPomodoroMode() {
+            clearInterval(state.pomodoroInterval);
+            state.isPomodoroRunning = false;
+            if (state.pomodoroMode === 'work') {
+                state.pomodoroMode = 'break';
+                state.pomodoroSeconds = 5 * 60;
+            } else {
+                state.pomodoroMode = 'work';
+                state.pomodoroSeconds = 25 * 60;
+            }
+            updatePomodoroUI();
+        }
+
+        function playChime() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+                osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.3); // A5
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.5);
+            } catch (e) {}
+        }
+
+        // Zen Rain Sound Synthesizer
+        function toggleZenSound() {
+            const btn = document.getElementById('btnToggleZenSound');
+            const icon = document.getElementById('zenSoundIcon');
+            const text = document.getElementById('zenSoundText');
+            const tooltip = document.getElementById('zenSoundTooltip');
+
+            if (state.isAmbientPlaying) {
+                if (state.audioCtx) {
+                    state.audioCtx.close();
+                    state.audioCtx = null;
+                }
+                state.isAmbientPlaying = false;
+                icon.className = 'ph ph-waveform text-kz-accent-light text-sm';
+                text.textContent = 'Zen Sound';
+                tooltip.textContent = 'Play Calm Rain & Brown Noise';
+            } else {
+                try {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    state.audioCtx = new AudioContext();
+                    
+                    const bufferSize = state.audioCtx.sampleRate * 2;
+                    const noiseBuffer = state.audioCtx.createBuffer(1, bufferSize, state.audioCtx.sampleRate);
+                    const output = noiseBuffer.getChannelData(0);
+                    let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+                    for (let i = 0; i < bufferSize; i++) {
+                        const white = Math.random() * 2 - 1;
+                        b0 = 0.99886 * b0 + white * 0.0555179;
+                        b1 = 0.99332 * b1 + white * 0.0750759;
+                        b2 = 0.96900 * b2 + white * 0.1538520;
+                        b3 = 0.86650 * b3 + white * 0.3104856;
+                        b4 = 0.55000 * b4 + white * 0.5329522;
+                        b5 = -0.7616 * b5 - white * 0.0168980;
+                        output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.04;
+                        b6 = white * 0.115926;
+                    }
+
+                    const whiteNoise = state.audioCtx.createBufferSource();
+                    whiteNoise.buffer = noiseBuffer;
+                    whiteNoise.loop = true;
+
+                    const filter = state.audioCtx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.frequency.value = 450;
+
+                    state.gainNode = state.audioCtx.createGain();
+                    state.gainNode.gain.value = 0.15;
+
+                    whiteNoise.connect(filter);
+                    filter.connect(state.gainNode);
+                    state.gainNode.connect(state.audioCtx.destination);
+
+                    whiteNoise.start(0);
+                    state.noiseNode = whiteNoise;
+                    state.isAmbientPlaying = true;
+
+                    icon.className = 'ph ph-speaker-high text-emerald-400 text-sm animate-pulse';
+                    text.textContent = 'Rain Playing';
+                    tooltip.textContent = 'Stop Calm Rain Noise';
+                } catch (err) {
+                    console.error('Audio play error', err);
+                }
+            }
+        }
+
+        // Live Clock
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('headerClockTime').textContent = timeStr;
+
+            const hour = now.getHours();
+            let greeting = 'Good Morning';
+            if (hour >= 12 && hour < 15) greeting = 'Good Afternoon';
+            else if (hour >= 15 && hour < 18) greeting = 'Good Evening';
+            else if (hour >= 18 || hour < 5) greeting = 'Night Owl';
+            document.getElementById('headerGreetingText').textContent = greeting + ',';
+        }
+
+        // Setup All Event Listeners on DOM Ready
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Storage States to Input Fields
+            document.getElementById('dailyFocusInput').value = state.dailyFocus;
+            document.getElementById('quickNotesInput').value = state.quickNotes;
+
+            // Daily Focus listener
+            document.getElementById('dailyFocusInput').addEventListener('input', (e) => {
+                state.dailyFocus = e.target.value;
+                safeStorage.setItem('kyzuch-focus', state.dailyFocus);
+            });
+
+            // Quick Notes listener
+            document.getElementById('quickNotesInput').addEventListener('input', (e) => {
+                state.quickNotes = e.target.value;
+                safeStorage.setItem('kyzuch-notes', state.quickNotes);
+            });
+
+            // Search input listener
+            const searchInput = document.getElementById('globalSearchInput');
+            searchInput.addEventListener('input', (e) => {
+                state.searchQuery = e.target.value;
+                renderToolsGrid();
+            });
+
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && state.searchQuery.trim() !== '') {
+                    quickSearchAI('perplexity');
+                }
+            });
+
+            document.getElementById('btnClearSearch').addEventListener('click', () => {
+                state.searchQuery = '';
+                searchInput.value = '';
+                renderToolsGrid();
+            });
+
+            // Task adder
+            const newTaskInput = document.getElementById('newTaskInput');
+            newTaskInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && newTaskInput.value.trim() !== '') {
+                    state.dailyTasks.push({ text: newTaskInput.value.trim(), completed: false });
+                    safeStorage.setItem('kyzuch-daily-tasks', JSON.stringify(state.dailyTasks));
+                    newTaskInput.value = '';
+                    renderDailyTasks();
+                }
+            });
+
+            document.getElementById('btnClearCompletedTasks').addEventListener('click', () => {
+                state.dailyTasks = state.dailyTasks.filter(t => !t.completed);
+                safeStorage.setItem('kyzuch-daily-tasks', JSON.stringify(state.dailyTasks));
+                renderDailyTasks();
+            });
+
+            document.getElementById('btnResetAllFilters').addEventListener('click', () => {
+                state.selectedCategory = 'all';
+                state.selectedRole = 'all';
+                state.selectedPricing = 'all';
+                state.searchQuery = '';
+                searchInput.value = '';
+                render();
+            });
+
+            // Pomodoro Controls
+            const pomodoroWidget = document.getElementById('pomodoroWidget');
+            document.getElementById('btnTogglePomodoro').addEventListener('click', () => {
+                pomodoroWidget.style.display = pomodoroWidget.style.display === 'none' ? 'flex' : 'none';
+            });
+            document.getElementById('btnClosePomodoro').addEventListener('click', () => {
+                pomodoroWidget.style.display = 'none';
+            });
+            document.getElementById('btnStartPausePomodoro').addEventListener('click', startPomodoro);
+            document.getElementById('btnResetPomodoro').addEventListener('click', resetPomodoro);
+            document.getElementById('btnSwitchPomodoroMode').addEventListener('click', switchPomodoroMode);
+
+            // Zen Sound
+            document.getElementById('btnToggleZenSound').addEventListener('click', toggleZenSound);
+
+            // Quick Notes Drawer
+            const notesDrawer = document.getElementById('quickNotesDrawer');
+            const toggleNotes = () => {
+                notesDrawer.style.display = notesDrawer.style.display === 'none' ? 'flex' : 'none';
+            };
+            document.getElementById('btnToggleNotes').addEventListener('click', toggleNotes);
+            document.getElementById('btnCloseNotes').addEventListener('click', toggleNotes);
+            document.getElementById('btnClearNotes').addEventListener('click', () => {
+                if (confirm('Bersihkan catatan scratchpad?')) {
+                    state.quickNotes = '';
+                    document.getElementById('quickNotesInput').value = '';
+                    safeStorage.setItem('kyzuch-notes', '');
+                }
+            });
+
+            // Add Custom Tool Modal
+            const addToolModal = document.getElementById('addToolModal');
+            const openAddTool = () => { addToolModal.style.display = 'flex'; renderIconPicker(); };
+            const closeAddTool = () => { addToolModal.style.display = 'none'; };
+            document.getElementById('btnOpenAddTool').addEventListener('click', openAddTool);
+            document.getElementById('btnFooterAddTool').addEventListener('click', openAddTool);
+            document.getElementById('btnCloseAddToolModal').addEventListener('click', closeAddTool);
+            document.getElementById('btnCancelAddTool').addEventListener('click', closeAddTool);
+
+            document.getElementById('addCustomToolForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                let url = document.getElementById('customToolUrl').value.trim();
+                if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+
+                const newTool = {
+                    name: document.getElementById('customToolName').value.trim(),
+                    url: url,
+                    description: document.getElementById('customToolDesc').value.trim() || 'Custom bookmark',
+                    category: document.getElementById('customToolCat').value,
+                    pricing: document.getElementById('customToolPricing').value,
+                    icon: state.selectedIcon || 'ph-app-window',
+                    tags: ['Custom', 'Bookmark'],
+                    isCustom: true
+                };
+
+                state.customTools.push(newTool);
+                safeStorage.setItem('kyzuch-custom-tools', JSON.stringify(state.customTools));
+                closeAddTool();
+                document.getElementById('addCustomToolForm').reset();
+                render();
+            });
+
+            // Prompt Cheatsheet Modal
+            const promptModal = document.getElementById('promptModal');
+            const openPrompts = () => { promptModal.style.display = 'flex'; renderPrompts(); };
+            const closePrompts = () => { promptModal.style.display = 'none'; };
+            document.getElementById('btnOpenPrompts').addEventListener('click', openPrompts);
+            document.getElementById('btnFooterPrompts').addEventListener('click', openPrompts);
+            document.getElementById('btnClosePromptModal').addEventListener('click', closePrompts);
+            document.getElementById('btnClosePromptModalFooter').addEventListener('click', closePrompts);
+
+            // Backup & Restore Modal
+            const backupModal = document.getElementById('backupModal');
+            const openBackup = () => { backupModal.style.display = 'flex'; };
+            const closeBackup = () => { backupModal.style.display = 'none'; };
+            document.getElementById('btnOpenBackup').addEventListener('click', openBackup);
+            document.getElementById('btnCloseBackupModal').addEventListener('click', closeBackup);
+            document.getElementById('btnCloseBackupModalFooter').addEventListener('click', closeBackup);
+
+            document.getElementById('btnDownloadBackupJSON').addEventListener('click', () => {
+                const backupData = {
+                    version: '1.2',
+                    exportDate: new Date().toISOString(),
+                    favorites: state.favorites,
+                    customTools: state.customTools,
+                    dailyFocus: state.dailyFocus,
+                    dailyTasks: state.dailyTasks,
+                    quickNotes: state.quickNotes
+                };
+                const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `kyzuch-backup-${new Date().toISOString().slice(0,10)}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+
+            document.getElementById('backupFileInput').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        if (data.favorites) state.favorites = data.favorites;
+                        if (data.customTools) state.customTools = data.customTools;
+                        if (data.dailyFocus) state.dailyFocus = data.dailyFocus;
+                        if (data.dailyTasks) state.dailyTasks = data.dailyTasks;
+                        if (data.quickNotes) state.quickNotes = data.quickNotes;
+
+                        safeStorage.setItem('kyzuch-favorites', JSON.stringify(state.favorites));
+                        safeStorage.setItem('kyzuch-custom-tools', JSON.stringify(state.customTools));
+                        safeStorage.setItem('kyzuch-focus', state.dailyFocus);
+                        safeStorage.setItem('kyzuch-daily-tasks', JSON.stringify(state.dailyTasks));
+                        safeStorage.setItem('kyzuch-notes', state.quickNotes);
+
+                        document.getElementById('dailyFocusInput').value = state.dailyFocus;
+                        document.getElementById('quickNotesInput').value = state.quickNotes;
+                        
+                        alert('✅ Data workspace berhasil diimpor!');
+                        closeBackup();
+                        render();
+                    } catch (err) {
+                        alert('Gagal membaca file JSON: ' + err.message);
+                    }
+                };
+                reader.readAsText(file);
+            });
+
+            // Keyboard shortcut ('/' to focus search)
+            window.addEventListener('keydown', (e) => {
+                if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+                if (e.key === 'Escape') {
+                    closeAddTool();
+                    closePrompts();
+                    closeBackup();
+                    notesDrawer.style.display = 'none';
+                    pomodoroWidget.style.display = 'none';
+                }
+            });
+
+            // PWA beforeinstallprompt capture
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                state.deferredPrompt = e;
+                const installBtn = document.getElementById('btnInstallPWA');
+                installBtn.style.display = 'flex';
+                installBtn.onclick = () => {
+                    installBtn.style.display = 'none';
+                    state.deferredPrompt.prompt();
+                    state.deferredPrompt = null;
+                };
+            });
+
+            // Initialize App
+            updateClock();
+            setInterval(updateClock, 30000);
+            render();
+        });
+    </script>
+</body>
+</html>
